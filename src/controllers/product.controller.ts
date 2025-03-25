@@ -14,8 +14,11 @@ export const getProducts = async (req: Request, res: Response) => {
 // Crear un producto
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, category, price, stock, description } = req.body;
-    const newProduct = new Product({ name, category, price, stock, description });
+    // Validar los datos del producto
+    console.log("📥 Datos recibidos:", req.body); // 👈 Verificar qué datos llegan
+    
+    const { nombre, descripcion, precio, categoria, stock, imagen } = req.body;
+    const newProduct = new Product({ nombre, descripcion, precio, categoria, stock, imagen });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
